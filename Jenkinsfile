@@ -4,19 +4,30 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/tirupdev/py_gha_jen.git'
+                git 'https://github.com/tirupdev/py_gha_jen.git'
+            }
+        }
+
+        stage('Install Python3 & pip') {
+            steps {
+                sh '''
+                    sudo apt update
+                    sudo apt install -y python3 python3-pip
+                    python3 --version
+                    pip3 --version
+                '''
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'python3 -m pip install -r requirements.txt'
             }
         }
 
-        stage('Run Tests') {
+        stage('Run Script') {
             steps {
-                sh 'python -m unittest test_main.py'
+                sh 'python3 main.py' // replace with your script
             }
         }
     }
