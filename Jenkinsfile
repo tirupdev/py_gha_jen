@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/tirupdev/py_gha_jen.git'
+                git branch: 'main', url:ttps://github.com/tirupdev/py_gha_jen.git'
             }
         }
 
